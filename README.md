@@ -15,3 +15,6 @@ By the moment nope
 ### 0.0.2
 
 Initial release
+
+### Why not? :wave:
+[Want to buy me something?](https://www.buymeacoffee.com/and.zav) :coffee:
