@@ -1,14 +1,30 @@
-import * as vscode from 'vscode';
+import {
+	commands,
+	ExtensionContext,
+	window,
+	Uri,
+	env,
 
+} from 'vscode';
 
-export function activate(context: vscode.ExtensionContext) {
+import { ImageEncoder} from './encoder';
+const output = window.createOutputChannel('Docs: Image compression');
 
-	let disposable = vscode.commands.registerCommand('img-contextual.helloWorld', () => {
+export function activate(context: ExtensionContext) {
 
-		vscode.window.showInformationMessage('Hello World from img-contextual!');
-	});
+	[
+		commands.registerCommand('img-contextual.encodeToB64', (uri: Uri) => {
 
-	context.subscriptions.push(disposable);
+			const encoder = new ImageEncoder();
+			const result = encoder.imageEncode(uri.fsPath);
+			if(result){
+				env.clipboard.writeText(result || '');
+				window.showInformationMessage('Copied to clipboard.');
+			}else{
+				window.showErrorMessage(`Can't encode this file.`);
+			}
+		})
+	].forEach(cmd => context.subscriptions.push(cmd));
 }
 
 export function deactivate() {}
