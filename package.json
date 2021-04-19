@@ -4,12 +4,12 @@
   "description": "Adds to contextual menu encode to base 64 and set into the clipboard",
   "keywords": ["Base64", "Images", "Encode"],
   "icon": "images/encoder.png",
-  "license": "SEE LICENSE IN LICENCE.TXT",
+  "license": "SEE LICENSE IN LICENCE",
   "publisher": "green-csv",
   "repository": "https://github.com/Asxom/img-contextual",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.51.0"
+    "vscode": "^1.55.0"
   },
   "galleryBanner": {
     "color": "#C80000",
