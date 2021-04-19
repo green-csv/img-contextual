@@ -12,6 +12,6 @@ Select the file, into the contextual menu 'Encode: to base 64' that's all
 ## Known Issues
 
 By the moment nope
-### 0.0.1
+### 0.0.2
 
 Initial release
