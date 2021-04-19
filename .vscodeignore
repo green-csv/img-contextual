@@ -11,5 +11,4 @@ vsc-extension-quickstart.md
 **/*.ts
 node_modules
 out/
-src/
 webpack.config.js

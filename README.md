@@ -6,7 +6,7 @@ Supported files  ".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico"
 
 Select the file, into the contextual menu 'Encode: to base 64' that's all
 
-![feature X](contextual-menu.png)
+![feature X](images/contextual-menu.png)
 
 
 ## Known Issues

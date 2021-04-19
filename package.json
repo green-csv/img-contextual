@@ -2,11 +2,18 @@
   "name": "img-contextual",
   "displayName": "Image To Base64 clipboard",
   "description": "Adds to contextual menu encode to base 64 and set into the clipboard",
+  "keywords": ["Base64", "Images", "Encode"],
+  "icon": "images/encoder.png",
+  "license": "SEE LICENSE IN LICENCE.TXT",
   "publisher": "green-csv",
   "repository": "https://github.com/Asxom/img-contextual",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.51.0"
+  },
+  "galleryBanner": {
+    "color": "#C80000",
+    "theme": "dark"
   },
   "categories": [
     "Other",
