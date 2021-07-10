@@ -15,13 +15,13 @@ Supported files  ".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico"
 * Decode selected base64 to Ascii accept __Multiple Selection__
 
 
-Select the file, into the contextual menu 'Encode: to base 64' that's all
+#### Select the file, into the contextual menu 'Encode: to base 64' that's all
 <img src='images/contextual-menu.png' width='30%' class='center'/>
 
-Context editor window
+#### Context editor window
 <img src='images/ContextMenu.png' width='30%' class='center'/>
 
-Command palette
+#### Command palette
 <img src='images/Palette.png' width='30%' class='center'/>
 
 ## Known Issues
