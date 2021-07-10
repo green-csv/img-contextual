@@ -1,10 +1,3 @@
-<style>
-   .center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-</style>
 # Image to Base 64 Clipboard
 
 Supported files  ".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico"
@@ -16,13 +9,13 @@ Supported files  ".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico"
 
 
 #### Select the file, into the contextual menu 'Encode: to base 64' that's all
-<img src='images/contextual-menu.png' width='30%' class='center'/>
+<img src='images/contextual-menu.png' width='30%'/>
 
 #### Context editor window
-<img src='images/ContextMenu.png' width='30%' class='center'/>
+<img src='images/ContextMenu.png' width='30%' />
 
 #### Command palette
-<img src='images/Palette.png' width='30%' class='center'/>
+<img src='images/Palette.png' width='30%' />
 
 ## Known Issues
 
