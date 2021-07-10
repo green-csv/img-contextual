@@ -7,7 +7,7 @@
   "license": "SEE LICENSE IN LICENCE",
   "publisher": "green-csv",
   "repository": "https://github.com/Asxom/img-contextual",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "engines": {
     "vscode": "^1.55.0"
   },
@@ -20,7 +20,9 @@
     "Formatters"
   ],
   "activationEvents": [
-    "onCommand:img-contextual.encodeToB64"
+    "onCommand:img-contextual.encodeToB64",
+    "onCommand:img-contextual.encodeTextToB64",
+    "onCommand:img-contextual.decodeB64ToAscii"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -28,6 +30,16 @@
       {
         "command": "img-contextual.encodeToB64",
         "title": "Encode: to base 64",
+        "category": "Encode"
+      },
+      {
+        "command": "img-contextual.encodeTextToB64",
+        "title": "Text to base 64",
+        "category": "Encode"
+      },
+      {
+        "command": "img-contextual.decodeB64ToAscii",
+        "title": " Base64 to Ascii",
         "category": "Encode"
       }
     ],
@@ -40,8 +52,26 @@
       ],
       "explorer/context": [
         {
-          "when": "resourceLangId == encodingImgTargetFile && !listMultiSelection",
-          "command": "img-contextual.encodeToB64"
+          "command": "img-contextual.encodeToB64",
+          "when": "resourceLangId == encodingImgTargetFile && !listMultiSelection"
+        },
+        {
+          "command": "img-contextual.encodeTextToB64",
+          "when": "false"
+        },
+        {
+          "command": "img-contextual.decodeB64ToAscii",
+          "when": "false"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "img-contextual.encodeTextToB64",
+          "when": "editorTextFocus"
+        },
+        {
+          "command": "img-contextual.decodeB64ToAscii",
+          "when": "editorTextFocus"
         }
       ]
     },

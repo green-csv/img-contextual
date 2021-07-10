@@ -1,5 +1,6 @@
-import { OutputChannel, Progress } from 'vscode';
+import { OutputChannel, Progress, Range, TextEditor } from 'vscode';
 import * as fs from 'fs';
+import { throws } from 'node:assert';
 
 
 export class ImageEncoder {
@@ -52,6 +53,42 @@ export class ImageEncoder {
 			}
 		}
 		return false;
+	}
+
+
+
+	public textEncodeToBase64(currentTextEditor: TextEditor | undefined): string {
+
+		if(currentTextEditor === undefined){return '';}
+
+		const document = currentTextEditor.document;
+		var linesEncoded: string = '';
+
+		currentTextEditor.selections.forEach( (e) =>{
+			let selection = document.getText(new Range(e.start, e.end));
+			let buffer = Buffer.from(selection);
+
+			linesEncoded += buffer.toString('base64') + '\n';
+		});
+
+		return linesEncoded;
+	}
+
+	public textDecodeBase64ToAscii(currentTextEditor: TextEditor | undefined): string {
+
+		if(currentTextEditor === undefined){return '';}
+
+		const document = currentTextEditor.document;
+		var linesDecoded: string = '';
+
+		currentTextEditor.selections.forEach( (e) =>{
+			let selection = document.getText(new Range(e.start, e.end));
+			let buffer = Buffer.from(selection, 'base64');
+
+			linesDecoded += buffer.toString('ascii') + '\n';
+		});
+
+		return linesDecoded;
 	}
 
 	private getFileExtension(filePath: string) {
