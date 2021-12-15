@@ -1,15 +1,16 @@
 import {
 	commands,
-	ExtensionContext,
-	window,
-	Uri,
 	env,
+	ExtensionContext,
+	Range,
 	Selection,
+	Uri,
 	TextDocument,
-	TextEditor
+	TextEditor,
+	window
 } from 'vscode';
-
-import { ImageEncoder} from './encoder';
+import { ImageEncoder } from './encoder';
+import { PreviewPanel } from './web-view/preview';
 const output = window.createOutputChannel('Docs: Image compression');
 
 export function activate(context: ExtensionContext) {
@@ -48,6 +49,17 @@ export function activate(context: ExtensionContext) {
 				window.showInformationMessage('Copied to clipboard.');
 			}else{
 				window.showErrorMessage(`Can't decode selected lines.`);
+			}
+		}),
+		commands.registerCommand('img-contextual.previewB64',() => {
+
+			if(window.activeTextEditor) {
+				const preview = new PreviewPanel();
+
+				const selection = window.activeTextEditor.selection as Selection;
+				const text = window.activeTextEditor.document.getText(new Range(selection.start, selection.end)) as string;
+
+				preview.show(text, context.extensionUri);
 			}
 		})
 	].forEach(cmd => context.subscriptions.push(cmd));

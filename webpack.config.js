@@ -1,8 +1,8 @@
 //@ts-check
 
-'use strict';
+'use strict'
 
-const path = require('path');
+const path = require('path')
 
 /**@type {import('webpack').Configuration}*/
 const config = {
@@ -29,11 +29,27 @@ const config = {
         exclude: /node_modules/,
         use: [
           {
-            loader: 'ts-loader'
+            // vscode-nls-dev loader:
+            // * rewrite nls-calls
+            loader: 'vscode-nls-dev/lib/webpack-loader',
+            options: {
+              base: path.join(__dirname, 'src')
+            }
+          },
+          {
+            // configure TypeScript loader:
+            // * enable sources maps for end-to-end source maps
+            loader: 'ts-loader',
+            options: {
+              compilerOptions: {
+                sourceMap: true,
+                "module": "es6"
+              }
+            }
           }
         ]
       }
     ]
   }
-};
-module.exports = config;
+}
+module.exports = config

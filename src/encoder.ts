@@ -1,10 +1,7 @@
-import { OutputChannel, Progress, Range, TextEditor } from 'vscode';
 import * as fs from 'fs';
-import { throws } from 'node:assert';
-
+import { Range, TextEditor } from 'vscode';
 
 export class ImageEncoder {
-	private isBatching = false;
 
 	private readonly fileExtensionExpression: RegExp = /(?:\.([^.]+))?$/;
 	private readonly imageExtensions: string[] = [
@@ -27,13 +24,14 @@ export class ImageEncoder {
 
 	constructor() { }
 
-	private filePathHasValidExtension(filePath: string) {
+	private filePathHasValidExtension(filePath: string): boolean {
 		if (filePath) {
 			const fileExtension = this.getFileExtension(filePath);
-			return (
+			let is = (
 				fileExtension &&
 				this.imageExtensions.some((ext) => ext === fileExtension.toLowerCase())
 			);
+			return !!is;
 		}
 		return false;
 	}
@@ -54,8 +52,6 @@ export class ImageEncoder {
 		}
 		return false;
 	}
-
-
 
 	public textEncodeToBase64(currentTextEditor: TextEditor | undefined): string {
 
@@ -91,12 +87,11 @@ export class ImageEncoder {
 		return linesDecoded;
 	}
 
-	private getFileExtension(filePath: string) {
-		if (!filePath) {
-			return null;
+	private getFileExtension(filePath: string): string{
+		if (filePath) {
+			const result = this.fileExtensionExpression.exec(filePath);
+			return result ? result[0] : '';
 		}
-
-		const result = this.fileExtensionExpression.exec(filePath);
-		return result ? result[0] : null;
+		return '';
 	}
 }
