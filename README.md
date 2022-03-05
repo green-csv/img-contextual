@@ -7,7 +7,7 @@ I hear suggestions for the extension, guess I'll deliver quickly new features, t
 Supported files  ".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico"
 
 ## Features
-* NEW Preview image for selected Base64 with his data:image/png;base64,... prepend to the string
+* NEW Preview image from selected Base64 with his data:image/png;base64,... prepend to the string
  - `data:image/png;base64,` is a must
 * Encode image files to Base64
 * Encode selected text to Base64  accept __Multiple Selection__
