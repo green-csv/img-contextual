@@ -116,7 +116,8 @@
     "webpack": "webpack --mode development",
     "webpack-dev": "webpack --mode development --watch",
     "test-compile": "tsc -p ./",
-    "lint": "eslint . --ext .ts,.tsx"
+    "lint": "eslint . --ext .ts,.tsx",
+    "publish": "vsce package && vsce publish"
   },
   "devDependencies": {
     "@types/glob": "^7.1.3",
