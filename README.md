@@ -1,7 +1,7 @@
 ### If is possible
-Recently I lost my job, I open to work, I'm reachable at ethics_patrol0x@icloud.com
+I'm reachable at ethics_patrol0x@icloud.com
 I hear suggestions for the extension, guess I'll deliver quickly new features, thanks =)
-[Just for a couple of days?](https://paypal.me/AreuAbellan?country.x=CO&locale.x=en_US)
+[Would like to support me?](https://paypal.me/AreuAbellan?country.x=CO&locale.x=en_US)
 # Image to Base 64 Clipboard
 
 Supported files  ".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico"
