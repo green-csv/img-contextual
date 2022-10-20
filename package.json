@@ -12,7 +12,7 @@
   "license": "SEE LICENSE IN LICENSE",
   "publisher": "green-csv",
   "repository": "https://github.com/Asxom/img-contextual",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "engines": {
     "vscode": "^1.55.0"
   },
