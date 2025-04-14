@@ -25,69 +25,46 @@ export class ImageEncoder {
 	constructor() { }
 
 	private filePathHasValidExtension(filePath: string): boolean {
-		if (filePath) {
-			const fileExtension = this.getFileExtension(filePath);
-			let is = (
-				fileExtension &&
-				this.imageExtensions.some((ext) => ext === fileExtension.toLowerCase())
-			);
-			return !!is;
-		}
-		return false;
+		const fileExtension = this.getFileExtension(filePath).toLowerCase();
+		return this.imageExtensions.includes(fileExtension);
 	}
 
 	public imageEncode(filePath: string): string | false {
-		if (this.filePathHasValidExtension(filePath)) {
-			const fileExtension = (this.getFileExtension(filePath) || '').toLowerCase();
+		if (!this.filePathHasValidExtension(filePath)) return false;
 
-			switch (fileExtension) {
-				case '.png':
-				case '.jpg':
-				case '.jpeg':
-				case '.gif':
-				case '.webp':
-				case '.ico':
-					return  `data:${this.imageMimeTypes.get(fileExtension)};base64,${fs.readFileSync(filePath, { encoding: 'base64' })}`;
-			}
-		}
-		return false;
+		const fileExtension = this.getFileExtension(filePath).toLowerCase();
+		const mimeType = this.imageMimeTypes.get(fileExtension);
+		if (!mimeType) return false;
+
+		const base64 = fs.readFileSync(filePath, { encoding: 'base64' });
+		return `data:${mimeType};base64,${base64}`;
 	}
 
 	public textEncodeToBase64(currentTextEditor: TextEditor | undefined): string {
-
-		if(currentTextEditor === undefined){return '';}
+		if (!currentTextEditor || currentTextEditor.selections.length === 0) return '';
 
 		const document = currentTextEditor.document;
-		var linesEncoded: string = '';
-
-		currentTextEditor.selections.forEach( (e) =>{
-			let selection = document.getText(new Range(e.start, e.end));
-			let buffer = Buffer.from(selection);
-
-			linesEncoded += buffer.toString('base64') + '\n';
-		});
-
-		return linesEncoded;
+		return currentTextEditor.selections
+			.map((selection) => {
+				const selectedText = document.getText(new Range(selection.start, selection.end));
+				return Buffer.from(selectedText).toString('base64');
+			})
+			.join('\n');
 	}
 
 	public textDecodeBase64ToAscii(currentTextEditor: TextEditor | undefined): string {
-
-		if(currentTextEditor === undefined){return '';}
+		if (!currentTextEditor || currentTextEditor.selections.length === 0) return '';
 
 		const document = currentTextEditor.document;
-		var linesDecoded: string = '';
-
-		currentTextEditor.selections.forEach( (e) =>{
-			let selection = document.getText(new Range(e.start, e.end));
-			let buffer = Buffer.from(selection, 'base64');
-
-			linesDecoded += buffer.toString('ascii') + '\n';
-		});
-
-		return linesDecoded;
+		return currentTextEditor.selections
+			.map((selection) => {
+				const selectedText = document.getText(new Range(selection.start, selection.end));
+				return Buffer.from(selectedText, 'base64').toString('ascii');
+			})
+			.join('\n');
 	}
 
-	private getFileExtension(filePath: string): string{
+	private getFileExtension(filePath: string): string {
 		if (filePath) {
 			const result = this.fileExtensionExpression.exec(filePath);
 			return result ? result[0] : '';
