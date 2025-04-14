@@ -36,12 +36,7 @@ export class PreviewPanel {
         <body>
          <main class="container">
             <div class="preview">
-               <img src="${safeImageSrc}" alt="Preview Decoded" />
-               <section class="meta">
-               <p><strong>File Type:</strong> Image (Base64)</p>
-               <p><strong>Resolution:</strong> Auto-detected by browser</p>
-               <p><strong>Size:</strong> Depends on base64 input</p>
-               </section>
+               <img src="${safeImageSrc}" alt="Preview Decoded" />              
             </div>
          </main>
          </body>
