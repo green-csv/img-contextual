@@ -48,7 +48,7 @@ function handleEncodeToBase64(uri: Uri, encoder: ImageEncoder) {
 
 function handleEncodeTextToBase64(encoder: ImageEncoder) {
   const editor = window.activeTextEditor;
-  if (!editor) return;
+  if (!editor) {return;}
 
   const result = encoder.textEncodeToBase64(editor);
   if (result) {
@@ -62,7 +62,7 @@ function handleEncodeTextToBase64(encoder: ImageEncoder) {
 
 function handleDecodeBase64ToAscii(encoder: ImageEncoder) {
   const editor = window.activeTextEditor;
-  if (!editor) return;
+  if (!editor) {return;}
 
   const result = encoder.textDecodeBase64ToAscii(editor);
   if (result) {
@@ -76,7 +76,7 @@ function handleDecodeBase64ToAscii(encoder: ImageEncoder) {
 
 function handlePreviewBase64(context: ExtensionContext) {
   const editor = window.activeTextEditor;
-  if (!editor) return;
+  if (!editor) {return;}
 
   const selection = editor.selection;
   const text = editor.document.getText(new Range(selection.start, selection.end));

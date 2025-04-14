@@ -5,12 +5,11 @@ export class ImageEncoder {
 
 	private readonly fileExtensionExpression: RegExp = /(?:\.([^.]+))?$/;
 	private readonly imageExtensions: string[] = [
-		'.png',
-		'.jpg',
-		'.jpeg',
-		'.gif',
-		'.webp',
-		'.ico'
+		'.png', '.jpg', '.jpeg', '.gif', '.webp', '.ico', '.svg',
+  	'.woff', '.woff2', '.ttf',
+  	'.mp3', '.ogg',
+  	'.mp4',
+  	'.pdf', '.json', '.html'
 	];
 	private readonly imageMimeTypes: Map<string, string> =
 		new Map<string, string>([
@@ -19,7 +18,17 @@ export class ImageEncoder {
 			['.jpeg', 'image/jpeg'],
 			['.gif', 'image/gif'],
 			['.webp', 'image/webp'],
-			['.ico', 'image/x-icon']
+			['.ico', 'image/x-icon'],
+			['.svg', 'image/svg+xml'],
+			['.woff', 'font/woff'],
+			['.woff2', 'font/woff2'],
+			['.ttf', 'font/ttf'],
+			['.mp3', 'audio/mpeg'],
+			['.ogg', 'audio/ogg'],
+			['.mp4', 'video/mp4'],
+			['.pdf', 'application/pdf'],
+			['.json', 'application/json'],
+			['.html', 'text/html']
 		]);
 
 	constructor() { }
@@ -30,18 +39,18 @@ export class ImageEncoder {
 	}
 
 	public imageEncode(filePath: string): string | false {
-		if (!this.filePathHasValidExtension(filePath)) return false;
+		if (!this.filePathHasValidExtension(filePath)) {return false;}
 
 		const fileExtension = this.getFileExtension(filePath).toLowerCase();
 		const mimeType = this.imageMimeTypes.get(fileExtension);
-		if (!mimeType) return false;
+		if (!mimeType) {return false;}
 
 		const base64 = fs.readFileSync(filePath, { encoding: 'base64' });
 		return `data:${mimeType};base64,${base64}`;
 	}
 
 	public textEncodeToBase64(currentTextEditor: TextEditor | undefined): string {
-		if (!currentTextEditor || currentTextEditor.selections.length === 0) return '';
+		if (!currentTextEditor || currentTextEditor.selections.length === 0) {return '';}
 
 		const document = currentTextEditor.document;
 		return currentTextEditor.selections
@@ -53,7 +62,7 @@ export class ImageEncoder {
 	}
 
 	public textDecodeBase64ToAscii(currentTextEditor: TextEditor | undefined): string {
-		if (!currentTextEditor || currentTextEditor.selections.length === 0) return '';
+		if (!currentTextEditor || currentTextEditor.selections.length === 0) {return '';}
 
 		const document = currentTextEditor.document;
 		return currentTextEditor.selections

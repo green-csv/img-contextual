@@ -18,7 +18,9 @@
   "engines": {
 		"vscode": "^1.74.0"
 	},
-  "activationEvents": [],
+  "activationEvents": [    
+    "onLanguage:encodingImgTargetFile" 
+  ],
   "galleryBanner": {
     "color": "#2C3E50",
     "theme": "dark"
@@ -27,28 +29,28 @@
     "Other",
     "Formatters"
   ],
-  "main": "./dist/extension",
+  "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
         "command": "img-contextual.encodeToB64",
-        "title": "Encode: to base64",
-        "category": "Encode"
+        "title": "Base64: Encode File",
+        "category": "Base64"
       },
       {
         "command": "img-contextual.encodeTextToB64",
-        "title": "Text to base64",
-        "category": "Encode"
+        "title": "Base64: Encode Selected Text",
+        "category": "Base64"
       },
       {
         "command": "img-contextual.decodeB64ToAscii",
-        "title": " Base64 to Ascii",
-        "category": "Encode"
+        "title": "Base64: Decode to ASCII Text",
+        "category": "Base64"
       },
       {
         "command": "img-contextual.previewB64",
-        "title": "Preview base64 image",
-        "category": "Encode"
+        "title": "Base64: Preview Encoded Image",
+        "category": "Base64"
       }
     ],
     "menus": {
@@ -98,12 +100,7 @@
       {
         "id": "encodingImgTargetFile",
         "extensions": [
-          ".png",
-          ".jpg",
-          ".jpeg",
-          ".gif",
-          ".webp",
-          ".ico"
+          ".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".svg", ".woff", ".woff2", ".ttf", ".mp3", ".ogg", ".mp4", ".pdf", ".json", ".html"
         ]
       }
     ]
@@ -112,22 +109,20 @@
     "vscode:prepublish": "npm run compile",
 		"compile": "tsc -p ./",
     "test-compile": "tsc -p ./",
-    "lint": "eslint . --ext .ts,.tsx",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
     "watch": "tsc -watch -p ./",
     "publish": "vsce package && vsce publish"
   },
   "devDependencies": {
-		"@eslint/js": "^9.13.0",
-		"@stylistic/eslint-plugin": "^2.9.0",
-		"@types/node": "^20",
-		"@types/vscode": "^1.73.0",
-		"eslint": "^9.13.0",
-		"typescript": "^5.8.2",
-		"typescript-eslint": "^8.26.0"
-	},
-  "dependencies": {
-    "file-type": "14.6.1",
-    "jshint": "^2.13.1",
-    "vscode-nls-dev": "^4.0.0"
-  }
+		"@types/vscode": "^1.99.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
+    "eslint": "^9.23.0",
+    "typescript": "^5.8.2",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+	}
 }
