@@ -7,7 +7,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ## [0.2.9] - 2024-4-14
 
 ### Added
-- Extended support for Base64 encoding to include `.woff`, `.woff2`, `.ttf`, `.mp3`, `.ogg`, `.mp4`, `.pdf`, `.json`, and `.html` files.
+- Extended support for Base64 encoding to include `".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".svg", ".woff", ".woff2", ".ttf", ".mp3", ".ogg", ".mp4", ".pdf", ".json", ".html"`
 - Refactored MIME map and file extension handling for broader use cases beyond images.
 - Theme-adaptive preview panel.
 - Checkerboard background to visualize transparency in images.
