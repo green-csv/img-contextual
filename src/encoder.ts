@@ -1,51 +1,25 @@
 import * as fs from 'fs';
-import { Range, TextEditor } from 'vscode';
-
+import { Range, TextEditor,  } from 'vscode';
+import { imageExtensions, imageMimeTypes, fileExtensionExpression } from './extensions-registry';
 export class ImageEncoder {
 
-	private readonly fileExtensionExpression: RegExp = /(?:\.([^.]+))?$/;
-	private readonly imageExtensions: string[] = [
-		'.png', '.jpg', '.jpeg', '.gif', '.webp', '.ico', '.svg',
-  	'.woff', '.woff2', '.ttf',
-  	'.mp3', '.ogg',
-  	'.mp4',
-  	'.pdf', '.json', '.html'
-	];
-	private readonly imageMimeTypes: Map<string, string> =
-		new Map<string, string>([
-			['.png', 'image/png'],
-			['.jpg', 'image/jpg'],
-			['.jpeg', 'image/jpeg'],
-			['.gif', 'image/gif'],
-			['.webp', 'image/webp'],
-			['.ico', 'image/x-icon'],
-			['.svg', 'image/svg+xml'],
-			['.woff', 'font/woff'],
-			['.woff2', 'font/woff2'],
-			['.ttf', 'font/ttf'],
-			['.mp3', 'audio/mpeg'],
-			['.ogg', 'audio/ogg'],
-			['.mp4', 'video/mp4'],
-			['.pdf', 'application/pdf'],
-			['.json', 'application/json'],
-			['.html', 'text/html']
-		]);
-
-	constructor() { }
+	constructor() {}
 
 	private filePathHasValidExtension(filePath: string): boolean {
 		const fileExtension = this.getFileExtension(filePath).toLowerCase();
-		return this.imageExtensions.includes(fileExtension);
+		return imageExtensions.includes(fileExtension);
 	}
 
-	public imageEncode(filePath: string): string | false {
-		if (!this.filePathHasValidExtension(filePath)) {return false;}
-
+	public imageEncode(filePath: string): string {
+		
 		const fileExtension = this.getFileExtension(filePath).toLowerCase();
-		const mimeType = this.imageMimeTypes.get(fileExtension);
-		if (!mimeType) {return false;}
-
+		const mimeType = imageMimeTypes.get(fileExtension);
+		
 		const base64 = fs.readFileSync(filePath, { encoding: 'base64' });
+		if (!mimeType) {
+			return `base64,${base64}`;
+		}
+		
 		return `data:${mimeType};base64,${base64}`;
 	}
 
@@ -75,7 +49,7 @@ export class ImageEncoder {
 
 	private getFileExtension(filePath: string): string {
 		if (filePath) {
-			const result = this.fileExtensionExpression.exec(filePath);
+			const result = fileExtensionExpression.exec(filePath);
 			return result ? result[0] : '';
 		}
 		return '';
