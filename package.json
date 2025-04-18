@@ -14,13 +14,10 @@
   "license": "SEE LICENSE IN LICENSE",
   "publisher": "green-csv",
   "repository": "https://github.com/Asxom/img-contextual",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "engines": {
 		"vscode": "^1.99.0"
-	},
-  "activationEvents": [    
-    "onLanguage:encodingImgTargetFile" 
-  ],
+	},  
   "galleryBanner": {
     "color": "#2C3E50",
     "theme": "dark"
@@ -63,7 +60,7 @@
       "explorer/context": [
         {
           "command": "img-contextual.encodeToB64",
-          "when": "resourceLangId == encodingImgTargetFile && !listMultiSelection"
+          "when": "resourceLangId && !listMultiSelection"
         },
         {
           "command": "img-contextual.encodeTextToB64",
@@ -95,15 +92,7 @@
           "group": "Encode"
         }
       ]
-    },
-    "languages": [
-      {
-        "id": "encodingImgTargetFile",
-        "extensions": [
-          ".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico", ".svg", ".woff", ".woff2", ".ttf", ".mp3", ".ogg", ".mp4", ".pdf", ".json", ".html"
-        ]
-      }
-    ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

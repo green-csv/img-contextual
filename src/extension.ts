@@ -14,10 +14,10 @@ const output = window.createOutputChannel('Docs: Image compression');
 
 export function activate(context: ExtensionContext) {
   const encoder = new ImageEncoder();
-
+  
   const subscriptions = [
-    commands.registerCommand('img-contextual.encodeToB64', (uri: Uri) =>
-      handleEncodeToBase64(uri, encoder)
+    commands.registerCommand('img-contextual.encodeToB64', (uri: Uri) => 
+      handleEncodeToBase64(uri, encoder)    
     ),
     commands.registerCommand('img-contextual.encodeTextToB64', () =>
       handleEncodeTextToBase64(encoder)
@@ -39,7 +39,7 @@ function handleEncodeToBase64(uri: Uri, encoder: ImageEncoder) {
   const result = encoder.imageEncode(uri.fsPath);
   if (result) {
     env.clipboard.writeText(result);
-    window.showInformationMessage('Copied image as Base64 to clipboard.');
+    window.showInformationMessage('Copied file as Base64 to clipboard.');
     output.appendLine(`Encoded: ${uri.fsPath}`);
   } else {
     window.showErrorMessage("Can't encode this file.");
